@@ -18,6 +18,7 @@ ESP8266WebServer server(80);
 
 StaticJsonDocument<150> configDoc;
 const char* ssid;
+//const char *ssid[20];
 const char* pass;
 const char* apppass;
 
@@ -74,7 +75,7 @@ void setup()
 	server.serveStatic("/", SPIFFS, "/index.html");
 	server.on("/challenge", challengeRequest);
 	server.on("/auth", HTTP_POST, checkToken);
-	server.on("/test", HTTP_POST, testJSON);
+	server.on("/authv2", HTTP_POST, authJson);
 	server.begin();
 }
 
@@ -119,7 +120,7 @@ int addChallenge() {
 			codes[i].used = false;
 			break;
 		}
-		else if (millis() - codes[i].codeTime > 5000) {
+		else if (millis() - codes[i].codeTime > 3000) {
 			Serial.println("drugi if");
 
 			codes[i].code = randomn;
@@ -129,7 +130,7 @@ int addChallenge() {
 
 		}
 		else {
-			Serial.println("wtf ne radi");
+			Serial.println("something is wrong with adding challange");
 		}
 
 	}
@@ -157,12 +158,26 @@ void checkToken() {
 
 }
 
-void testJSON() {
-	StaticJsonDocument<200> body;
-	deserializeJson(body, server.arg("plain"));
 
-	server.send(200, "text/plain", body["test"]);
+bool tokenExistsJSON(const char* plainBody) {
+
+	StaticJsonDocument<200> jsonBody;
+	deserializeJson(jsonBody, plainBody);
+	serializeJsonPretty(jsonBody, Serial);
+	const char* actionString = jsonBody["action"];
+	int i;
+
+	for (i = 0; i < codesLength; i++) {
+
+		if (strcmp(sha1(apppass + (String)codes[i].code + actionString).c_str(), jsonBody["token"]) == 0) {
+			codes[i].used = true;
+			return true;
+		}
+	}
+
+	return false;
 }
+
 bool tokenExist(const char* hashI) {
 	int i;
 	int comparison;
@@ -183,3 +198,24 @@ bool tokenExist(const char* hashI) {
 	}
 	return false;
 }
+
+void authJson() {
+
+	if (tokenExistsJSON(server.arg("plain").c_str())) {
+		//printAllChallanges();
+		actionsHandler(server.arg("plain").c_str());
+		server.sendHeader("Access-Control-Allow-Origin", "*");
+		server.send(200, "text/plain", "ok");
+	}
+	else {
+		//printAllChallanges();
+		server.sendHeader("Access-Control-Allow-Origin", "*");
+		server.send(200, "text/plain", "forbidden");
+	}
+}
+
+
+// handles actions from json body
+void actionsHandler(const char* plainBody) {
+	Serial.print("action handled");
+ }
