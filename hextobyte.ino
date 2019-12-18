@@ -70,18 +70,6 @@ void setup()
 
 	
 
-	char hexstring[] = "5a52319fe4c9c766c93d56b0228e3bb7c8e4d5be3af1a4c76de9303c52c4832e3dbac98b1e22e08f5ef7c964a098c5c3";
-	const int hexLength = (strlen(hexstring) / 2);
-
-	chacha20_init_context(&ctx, testKey, testNonce, 1);
-	byte *ok = (byte*)malloc(hexLength * sizeof(byte));
-
-	hexCharacterStringToBytes(ok, hexstring);
-
-	chacha20_xor(&ctx, ok, hexLength);
-	Serial.println("idemo string");
-
-		Serial.print((char*)ok);
 
 }
 
