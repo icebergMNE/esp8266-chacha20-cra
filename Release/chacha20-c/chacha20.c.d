@@ -1,0 +1,22 @@
+C:\Users\fusta\AppData\Local\Temp\VMBuilds\hextobyte\esp8266_nodemcu\Release\chacha20-c\chacha20.c.o: \
+ C:\Users\fusta\Documents\Arduino\libraries\chacha20-c\chacha20.c \
+ C:\Users\fusta\Documents\Arduino\libraries\chacha20-c\chacha20.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/assert.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/newlib.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/config.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/ieeefp.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/features.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/xtensa/config/core-isa.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/pgmspace.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/stdint.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/_default_types.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/_intsup.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/string.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/reent.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/_types.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/_types.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/lock.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/cdefs.h \
+ C:\Users\fusta\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.2/tools/sdk/libc/xtensa-lx106-elf/include/sys/string.h

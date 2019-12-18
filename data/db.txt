@@ -1,0 +1,5 @@
+{
+  "ssid": "fruklin",
+  "pass":"Budapest001!",
+  "apppass": "nodemcu"
+}

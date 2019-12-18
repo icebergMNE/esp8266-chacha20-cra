@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.js"
+      integrity="sha256-LmIVkNdxjrHbViQZD9LSewZc+3rU/alc7P/UJj6mUPc="
+      crossorigin="anonymous"
+    ></script>
+    <title>Node mcu</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        
+        height: 100vh;
+        background-color: #17252A;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      button{
+        padding: 0.3em 1.2em;
+        margin: 22px 16px;
+        border: 0.16em solid rgba(255, 255, 255, 0);
+        background-color: #3AAFA9;
+        border-radius: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 300;
+        color: #ffffff;
+        text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+        text-align: center;
+        transition: all 0.2s;
+      }
+      button:hover{
+        border-color: rgba(255, 255, 255, 1);
+      }
+      .form-button{
+        
+      }
+      .form-button:hover {
+        /* border-color: rgba(255, 255, 255, 1); */
+      }
+      .actions-btn{
+
+      }
+      .form-header{
+        color: #DEF2F1;
+      }
+      .form-input{
+        padding: 4px;
+        border-radius: 1em;
+      }
+      .form-error{
+        color: #d60c0c;
+        font-size: 16px;
+        text-transform: uppercase;
+        visibility: hidden;
+      }
+      .container-login{
+        display: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+      }
+      .container-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #FEFFFF;
+        color: #17252A;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-login" >
+      <form class="form" onsubmit="login(event)">
+        <h2 class="form-header">ESP8266</h2>
+        <input  class="form-input" type="password" name="password" id="password" placeholder="password" required/>
+        <button class="form-button">Log in</button>
+        <p class="form-error">
+          wrong password
+        </p>
+      </form>
+    </div>
+    <div class="container-actions">
+      <button class="actions-btn">
+        Action
+      </button>
+    </div>
+
+    <script>
+      const IP_ADDRESS = '/';
+      // const IP_ADDRESS = 'http://192.168.0.123/';
+
+
+      const logInButton = document.querySelector(".form-button");
+      const formError = document.querySelector(".form-error");
+      const actionBtn = document.querySelector(".actions-btn");
+      const loginPage = document.querySelector(".container-login");
+      const actionsPage = document.querySelector(".container-actions");
+
+      async function login(event){
+        event.preventDefault();
+        // console.log(event.target.password.value);
+        const password = event.target.password.value;
+
+        const req = await fetch(`${IP_ADDRESS}challenge`);
+        const challenge = await req.text();
+
+        const action = {
+          type:"login"
+        }
+        const actionString = JSON.stringify(action);
+        const formData = {
+          token: sha1(password + challenge + actionString),
+          action: actionString
+        }
+
+        const authReq = await fetch(`${IP_ADDRESS}authv2`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'},
+          body:JSON.stringify(formData)
+        });
+
+        const authRes = await authReq.text();
+        console.log('authRes:', authRes)
+
+        if(authRes === 'ok'){
+          window.localStorage.setItem('password', password);
+          loginPage.style.display = 'none';
+          formError.style.visibility = 'hidden'
+        }
+        else{
+          formError.style.visibility = 'visible'
+        }
+      }
+
+
+      actionBtn.addEventListener('click', async (event)=>{
+        event.preventDefault();
+        const req = await fetch(`${IP_ADDRESS}challenge`);
+        const challenge = await req.text();
+
+        const action = {
+          type:"turnon",
+          gpio:"1",
+
+        }
+        const actionString = JSON.stringify(action);
+        const formData = {
+          token: sha1(password + challenge + actionString),
+          action: actionString
+        }
+
+        const authReq = await fetch(`${IP_ADDRESS}authv2`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'},
+          body:JSON.stringify(formData)
+        });
+
+        const authRes = await authReq.text();
+        console.log('authRes:', authRes)
+
+        // console.log(challenge);
+      })
+
+    </script>
+  </body>
+</html>
